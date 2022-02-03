@@ -1,0 +1,21 @@
+Scripts:
+    main.py -- lynchpin of script
+        script_publickey -- using cleos, gets the public keys of all accounts not in time out
+        script_bpjson -- processes minimum requirements from provided bp.jsons
+            validate_geocoordinates_script -- makes sure stated location matches stated geocoordinates
+        script_tls -- finds TLS status of ssl_endpoint(s) listed in bpjson
+        script_peer_node_responsive -- check whether peer node is responsive
+        script_block_history -- check via random sampling whether full block history is saved on api endpoint
+        script_performance -- check (via the average) whether CPU performance is under 500 microseconds
+        script_parse_csv_responses -- parse CSV for responses to form questions
+
+        script_print_report -- after all processing, prints report(s) to file(s)
+
+Headers:
+    node_loop.py 
+        - used to find a specific value nested in the "node" dict nested in the "json_data_dict"
+        - used in script_tls, script_peer_node_responsive, script_block_history
+
+Classes:
+    Validator class
+    Error class -- error handling
