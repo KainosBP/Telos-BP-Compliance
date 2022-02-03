@@ -1,0 +1,146 @@
+ToDo:
+X process bp.jsons - org
+X process bp.jsons - nodes
+X check lat/long against country 
+X TLS check
+X public key
+X performance # https://app.telos.net/validators
+X fix the "more nodes gives more points" problem
+X process JD's CSV
+X check block history is saved (on API/query/hyperion node); on chain api (link), want "get_block"
+X check peer (p2p) node is responsive
+X write full csv info to report
+- extract node looping from TLS, p2p, etc (TLS (ssl) done, p2p done)
+X split report into individual files
+X HK to CN thing
+X output in JSON
+X score not going to json
+- remove "ssl_endpoint: list index out of range: ['']" -> see if it's a real prob, if so, write to errors
+- issue with writing report
+    - not all txts are writing to file
+    X not all of big report is writing (only last one?)
+    --> functions seem to hit correctly
+- handle multiple entries in form from same producer
+
+the producer node is the only one care about location
+block_history doesn't need to be checking producer node
+
+----------------------------------------------
+
+10/25/21 - JD
+
+If the BV URL is not available, write the BV in the report with a 0.  I still want to see all the BV names in the report.
+
+Ask J.T. what to do with some of the BVs who don't have their bp.json script available.  Some bp.json links give errors and one is a link to download the bp.json file.
+
+In the future, add the ability to automatically check if all the BVs listed on https://telos.bloks.io/vote are being included in the Compliance Report.  There are new BVs that come online over time.
+
+
+git commit -m "Finished adding all the current BVs from https://telos.bloks.io/vote.  Added some meeting notes."
+
+
+
+10/22/21 - TB
+X bp checks (except public key)
+    X add node processing (currently just org processing)
+X check lat/long against country
+- TLS check (prob won't get done, but get started)
+
+
+
+X For the location geo parameters, if they are listed they need to be verified manually with Google maps or something to see if they match with the listed cities in the JSON page. I am not sure if that can be automated.
+
+# check performance is under 500 microseconds
+
+X compare lat/long to country
+
+X report should show score field by field (not just the total as I have printing now)
+
+# see if I can programmatically check for firewall being active ("producing nodes should not be open to the internet or accessible by us")
+
+# BP node should NOT be on the same public IP (internet circuit) as the AI node (should be able to get IP addresses and compare)
+    # can multiple nodes be on the same server? Otherwise, this doesn't make sense?
+        # BP node should NOT be on same server as any other; MUST be segregated
+        # others are fine (?)
+
+# response back from node should include TLS info
+
+# check TLS version (cdn77.com/tls-test), If SSLv2, SSLv3, TLS1.0, TLS1.1 enabled, that should be a non-compliance (i.e., a 0).
+    # ssl_endpoint
+    # to send the URL, instead of passing through the GUI, stick right into end-URL
+    # try F12 -> Accessibility for scraping
+
+# check current report against previous and alert changes (prob last thing to do)
+
+--
+DON'T NEED HARDCODED URL LIST ANYMORE. SAVING JUST IN CASE.
+
+bv_url_list = [
+    "https://caleos.io/bp.json",
+    "https://bp.infinitybloc.io/bp.json",
+    "https://telosgreen.com/bp.json",
+    "https://goodblock.io/bp.json",
+    "https://greymass.com/bp.json",
+    "https://telos.kitchen/bp.json",
+    "https://eosza.io/bp.json",
+    "https://telosglobal.io/bp.json",
+    "https://eosrio.io/bp.json",
+    "https://telosuk.io/bp.json",
+    "https://theteloscope.io/bp.json",
+    "https://telosmadrid.io/bp.json",
+    "https://bp.telosusa.io/telos/bp.json",
+    "https://bp.teleology.one/bp.json",
+    "https://persiantelos.com/bp.json",
+    "https://uae.telosarabia.net/bp.json",
+    "https://www.genereos.io/bp.json",
+    "https://kainosbp.com/bp.json",
+    "https://telosunlimited.io/bp.json",
+    "https://eostribe.io/bp.json",
+    "https://zenblocks.io/bp.json",
+    "https://www.eoscafeblock.com/bp.json",
+    "https://www.eosphere.io/bp.json",
+    "https://www.teloscrew.com/bp.json",
+    "https://telos.eosamsterdam.net/bp.json",
+    "https://www.katalyo.com/telos/bp.json",
+    "https://eosargentina.io/bp.json",
+    "https://telos.boid.com/bp.json",
+    "https://eosimpera.io/bp.json",
+    "https://eosdetroit.io/bp.json",
+    "https://kandaweather.org/bp.json",
+    "https://teloscentral.com/bp.json",
+    "https://bp.blockbastards.io/telos/bp.json",
+    "https://bp.teloskorea.com/bp.json",
+    "https://api.blindblocart.io/bp.json",
+    "https://www.creativblock.org/bp.json",
+    "https://eosvenezuela.io/bp.json",
+    "https://api.bigiron.io/bp.json",
+    "https://www.hkeos.com/bp.json",
+    "https://cryptolions.io/bp.json",
+    "https://dappetizer.io/bp.json",
+    "https://pandabloks.com/bp.json",
+    "https://telosdac.io/bp.json",
+    "https://hackthemall.club/bp.json",
+    "https://eosdublin.com/bp.json",
+    "https://monsterblock.io/bp.json",
+    "https://dutcheos.io/bp.json",
+    "https://www.sentnl.io/bp.json",
+    "https://eossweden.eu/telos/bp.json",
+    "https://eoscostarica.io/bp.json",
+    "https://api.gyftie.org/bp.json",
+    "https://www.nodenode.org/bp.json"
+ ]
+--
+
+
+Documents to read for creating list of requirements:
+* Block Producer Minimum Requirements
+* Regproducer Agreement
+* Telos Blockchain Network Operating Agreement
+
+
+Documents hosted at:
+https://tbnoa.org/
+
+Other relevant sites:
+https://docs.telos.net/
+https://docs.telos.net/validator-nodes/setting-up-telos-validator-nodes
